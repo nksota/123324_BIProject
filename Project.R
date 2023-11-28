@@ -146,11 +146,23 @@ if (require("dplyr")) {
 }
 
 # Milestone 1 ----
-## Issue 1: Descriptive Statistics ----
+## Issue 1:  ----
 
 ### Step 2: Load the dataset(s) ----
-DonationsDataset <- read.csv("data/Food Bank of Southeastern Virginia.csv")
-testing <- read.csv("data/testing.csv")
+DonationsDataset <- read_csv("data/Food Bank of Southeastern Virginia.csv",
+                                             col_types = cols(
+                
+                                               Year = col_integer(),
+                                               Month = col_character(),
+                                               Locality = col_character(),
+                                               `Households Served` = col_integer(),
+                                               `Individuals Served` = col_integer(),
+                                               `Pounds of Food Distributed`= col_integer(),
+                                               `Children Served via non-federal child nutrition programs` = col_integer(),
+                                               `Pounds of food distributed via non-federal child nutrition progr` = col_integer()
+                                             )
+)
+
 
 
 dim(DonationsDataset)
@@ -174,6 +186,7 @@ print(donation_mode)
 
 ### Step 5: Measures of Distribution ----
 summary(DonationsDataset)
+
 
 ### Step 6: Measures of Relationship
 #### Measure the standard deviation ----
@@ -306,7 +319,7 @@ heatmap(confusion_matrix2$table, col = c("grey", "lightblue"),
 results <- resamples(list(KNN = donations_caret_model_knn, 
                           SVM = donations_caret_model_svm_radial))
 
-### Step 12: Display the comparison ----
+### Step 12: Display the comparisons ----
   #### 1. Table Summary ----
 summary(results)
 

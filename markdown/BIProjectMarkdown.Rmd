@@ -1,0 +1,459 @@
+---
+title: "Business Intelligence Project Markdown"
+author: "Kelly sota"
+date: "27/11/23"
+output:
+  github_document:
+    toc: yes
+    toc_depth: 4
+    fig_width: 6
+    fig_height: 4
+    df_print: default
+always_allow_html: true
+editor_options:
+  chunk_output_type: console
+---
+
+
+# Student Details
+
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Student ID Number and Name**                    |                                                                                                      | 
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   | 123324 - B - Kelly Noella Sota                                                                       |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
+|                                                   |                                                                                                      |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **GitHub Classroom Group Name**                   |    Lumin                                                                                             |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Course Code**                                   | BBT4206                                                                                              |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Course Name**                                   | Business Intelligence II                                                                             |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Program**                                       | Bachelor of Business Information Technology                                                          |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Semester Duration**                             | 21^st^ August 2023 to 28^th^ November 2023                                                           |
++---------------------------------------------------+------------------------------------------------------------------------------------------------------+
+
+# Setup Chunk
+
+**Note:** the following "*KnitR*" options have been set as the defaults:\
+`knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE, collapse = FALSE, tidy.opts = list(width.cutoff = 80), tidy = TRUE)`.
+
+More KnitR options are documented here <https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and here <https://yihui.org/knitr/options/>.
+
+```{r setup, include=FALSE}
+if (require("formatR")) {
+  require("formatR")
+} else {
+  install.packages("formatR", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+library(formatR)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE,
+                      collapse = FALSE, tidy = TRUE)
+```
+
+**Note:** the following "*R Markdown*" options have been set as the defaults:
+
+> output:\
+> \
+> github_document:\
+> toc: yes\
+> toc_depth: 4\
+> fig_width: 6\
+> fig_height: 4\
+> df_print: default\
+> \
+> editor_options:\
+> chunk_output_type: console
+
+
+### 1: Install and Load Required Packages
+In this step, we ensure that the necessary R packages are installed and loaded. Packages are collections of R functions, data, and compiled code that extend the functionality of R. The install.packages() function is used to install packages, and library() is used to load them.
+```{r setup-chunk-one}
+### Step 1: Load the required packages ----
+#### languageserver ----
+if (!is.element("languageserver", installed.packages()[, 1])) {
+  install.packages("languageserver", dependencies = TRUE)
+}
+require("languageserver")
+
+####readxl ----
+
+if (!is.element("readxl", installed.packages()[, 1])) {
+  install.packages("readxl", dependencies = TRUE)
+}
+require("readxl")
+
+#### plumber ----
+if (require("plumber")) {
+  require("plumber")
+} else {
+  install.packages("plumber", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+####e1071----
+
+if (!is.element("e1071", installed.packages()[, 1])) {
+  install.packages("e1071", dependencies = TRUE)
+}
+require("e1071")
+
+#### caretEnsemble ----
+
+if (!is.element("caretEnsemble", installed.packages()[, 1])) {
+  install.packages("caretEnsemble", dependencies = TRUE)
+}
+require("caretEnsemble")
+
+####moments----
+
+if (!is.element("moments", installed.packages()[, 1])) {
+  install.packages("moments", dependencies = TRUE)
+}
+require("moments")
+
+#### klaR ----
+if (require("klaR")) {
+  require("klaR")
+} else {
+  install.packages("klaR", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### LiblineaR ----
+if (require("LiblineaR")) {
+  require("LiblineaR")
+} else {
+  install.packages("LiblineaR", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### naivebayes ----
+if (require("naivebayes")) {
+  require("naivebayes")
+} else {
+  install.packages("naivebayes", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### readr ----
+if (require("readr")) {
+  require("readr")
+} else {
+  install.packages("readr", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### RRF ----
+if (require("RRF")) {
+  require("RRF")
+} else {
+  install.packages("RRF", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### naniar ----
+if (require("naniar")) {
+  require("naniar")
+} else {
+  install.packages("naniar", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### ggplot2 ----
+if (require("ggplot2")) {
+  require("ggplot2")
+} else {
+  install.packages("ggplot2", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### corrplot ----
+if (require("corrplot")) {
+  require("corrplot")
+} else {
+  install.packages("corrplot", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### ggcorrplot ----
+if (require("ggcorrplot")) {
+  require("ggcorrplot")
+} else {
+  install.packages("ggcorrplot", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### mlbench ----
+if (require("mlbench")) {
+  require("mlbench")
+} else {
+  install.packages("mlbench", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### stringi ----
+if (require("stringi")) {
+  require("stringi")
+} else {
+  install.packages("stringi", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### caret ----
+if (require("caret")) {
+  require("caret")
+} else {
+  install.packages("caret", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+#### dplyr ----
+if (require("dplyr")) {
+  require("dplyr")
+} else {
+  install.packages("dplyr", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+```
+
+# A. Milestone 1
+
+## Issue 1: Descriptive Statistics 
+
+### 2. Load the Dataset
+This code snippet is used to load the dataset "Food Bank of Southeastern Virginia".
+```{r step-two-chunk}
+library(readr)
+
+DonationsDataset <- read_csv("data/Food Bank of Southeastern Virginia.csv", col_types = cols(
+  Year = col_integer(),
+  Month = col_character(),
+  Locality = col_character(),
+  `Households Served` = col_double(),
+  `Individuals Served` = col_double(),
+  `Pounds of Food Distributed` = col_double(),
+  `Children Served via non-federal child nutrition programs` = col_double(),
+  `Pounds of food distributed via non-federal child nutrition progr` = col_double()
+))
+
+
+
+
+dim(DonationsDataset)
+sapply(DonationsDataset, class)
+any_miss(DonationsDataset)
+
+
+```
+
+### 3.  Measures of Frequency
+This code snippet focuses on analyzing the frequency of donations based on the "Locality" variable in the dataset 
+```{r step-three-chunk}
+donation_freq <- DonationsDataset$Locality
+cbind(frequency = table(donation_freq),
+      percentage = prop.table(table(donation_freq)) * 100)
+```
+
+### 4.Measures of Central Tendency  
+The following snippet calculates the mode of the "Locality" variable in the dataset. The mode is the value that appears most frequently in the dataset. 
+```{r step-four-chunk}
+donation_mode <- names(table(DonationsDataset$Locality))[
+  which(table(DonationsDataset$Locality) == 
+          max(table(DonationsDataset$Locality)))
+]
+print(donation_mode)
+```
+
+
+### 5. Measures of Distribution
+This code is used to generate a summary of the distribution of the variables in the dataset. 
+```{r step-five-chunk}
+summary(DonationsDataset)
+```
+
+
+
+## Issue 3 and 4: Basic Visualization and Preprocessing and Data Transformation
+
+### 6.  Apply a Scale Data Transform
+
+ This code explores the distribution of selected variables in the original dataset, applies a scale transformation to specific columns, and then examines the distribution of these transformed variables. 
+
+```{r step-8-chunck}
+summary(DonationsDataset)
+
+
+
+hist(DonationsDataset$`Households Served`, main = "Histogram for Households Served")
+hist(DonationsDataset$`Individuals Served`, main = "Histogram for Individuals Served")
+hist(DonationsDataset$`Pounds of Food Distributed`, main = "Histogram for Pounds.of.Food.Distributed")
+
+
+model_of_the_transform <- preProcess(DonationsDataset[c("Individuals Served", "Pounds of Food Distributed", "Households Served")], method = c("scale"))
+
+print(model_of_the_transform)
+
+Donations_scale_transform <- predict(model_of_the_transform, DonationsDataset[c("Individuals Served", "Pounds of Food Distributed", "Households Served")])
+
+
+summary(Donations_scale_transform)
+
+
+hist(DonationsDataset$`Households Served`, main = "Histogram for Households Served")
+hist(DonationsDataset$`Individuals Served`, main = "Histogram for Individuals Served")
+hist(DonationsDataset$`Pounds of Food Distributed`, main = "Histogram for Pounds.of.Food.Distributed")
+
+```
+
+
+## Issue 5. Training the Model 
+
+### 7. Splitting the Dataset
+
+The code splits the original dataset into training and testing subsets 
+
+``` {r step -9-chunck}
+str(DonationsDataset)
+str(Donations_scale_transform)
+
+train_index <- createDataPartition(DonationsDataset$`Pounds of Food Distributed`,
+                                   p = 0.75,
+                                   list = FALSE)
+donation_dataset_train <- DonationsDataset[train_index, ]
+donation_dataset_test <- DonationsDataset[-train_index, ]
+```
+
+### 8. Train the model
+
+This code trains KNN and SVM models on a training dataset, makes predictions on a test dataset, and evaluates the performance of these models using confusion matrices and heatmaps.
+
+```{r step-10-chunck}
+#KNN
+set.seed(7)
+train_control_knn <- trainControl(method = "cv", number = 5)
+donations_caret_model_knn <- train(Locality ~ ., data = donation_dataset_train,
+                                  method = "knn", metric = "Accuracy",
+                                  preProcess = c("center", "scale"),
+                                  trControl = train_control_knn)
+
+ #SVM
+set.seed(7)
+train_control_svm <- trainControl(method = "cv", number = 5)
+donations_caret_model_svm_radial <- # nolint: object_length_linter.
+  train(Locality ~ ., data = donation_dataset_train, method = "svmRadial",
+        metric = "Accuracy", trControl = train_control_svm)
+#### Display the model's details ----
+print(donations_caret_model_knn)
+print(donations_caret_model_svm_radial)
+
+  #### Make predictions ----
+  #KNN
+predictions1 <- predict(donations_caret_model_knn,
+                       donation_dataset_test[, c(1,2,4,5,6,7,8)])
+
+ #SVM
+predictions2 <- predict(donations_caret_model_svm_radial,
+                       donation_dataset_test[, c(1,2,4,5,6,7,8)])
+
+  #### Display the model's evaluation metrics ----
+all_levels <- union(levels(predictions1), levels(donation_dataset_test$Locality))
+all_levels <- union(levels(predictions2), levels(donation_dataset_test$Locality))
+donation_dataset_test$Locality <- factor(donation_dataset_test$Locality, levels = all_levels)
+predictions1 <- factor(predictions1, levels = all_levels)
+predictions2 <- factor(predictions2, levels = all_levels)
+
+ #KNN
+confusion_matrix1 <-
+  caret::confusionMatrix(predictions1,
+                         donation_dataset_test$Locality)
+print(confusion_matrix1)
+
+heatmap(confusion_matrix1$table, col = c("grey", "lightblue"),
+        main = "Confusion Matrix")
+
+ #SVM
+table(predictions2, donation_dataset_test$Locality)
+confusion_matrix2 <-
+  caret::confusionMatrix(predictions2,
+                         donation_dataset_test$Locality)
+print(confusion_matrix2)
+
+heatmap(confusion_matrix2$table, col = c("grey", "lightblue"),
+        main = "Confusion Matrix")
+
+```
+
+
+### 9. Call the resamples Function
+
+This R code uses the resamples function to store and organize the resampling results  for the two models.
+
+```{r step-11-chunck}
+results <- resamples(list(KNN = donations_caret_model_knn, 
+                          SVM = donations_caret_model_svm_radial))
+```
+
+### 10. Display the comparisons
+
+This R code provides a summary and visual representation of the resampling results obtained from the two models.
+
+```{r step-12-chunck}
+  # Table Summary----
+summary(results)
+
+  # Box and Whisker Plot----
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
+bwplot(results, scales = scales)
+
+  #Dot Plots----
+
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
+dotplot(results, scales = scales)
+```
+
+## Issue 6: Hyper-Parameter Tuning and Ensembles
+
+### 11. Random Search
+
+This code performs a random search for hyperparameter tuning of the SVM model.
+
+```{r step-13-chunck}
+donations_independent_variables <- DonationsDataset[, c(1,2,3,4,5,7,8)]
+donations_dependent_variables <- DonationsDataset[, 6]
+
+set.seed(7)
+
+  # Define the tuning grid for SVM (Radial Kernel)
+tunegrid_svm <- expand.grid(
+  sigma = runif(12, 0.01, 1), 
+  C = runif(12, 0.1, 10)    
+)
+
+  # Set up train control for cross-validation
+train_control_svm <- trainControl(method = "cv", number = 5)
+
+  # Train the SVM model with random search
+donations_caret_model_svm_radial_random_search <- train(
+  Locality ~ ., 
+  data = donation_dataset_train, 
+  method = "svmRadial",
+  metric = "Accuracy",
+  tuneGrid = tunegrid_svm,
+  trControl = train_control_svm
+)
+
+  # Print and plot the results
+print(donations_caret_model_svm_radial_random_search)
+plot(donations_caret_model_svm_radial_random_search)
+```
